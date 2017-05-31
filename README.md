@@ -15,4 +15,5 @@ ios逆向工程学习记录
 ## Notes
 
 - [Ios10.2越狱后ssh连接不上的问题](/ssh.md)
+- [ios10.2安装python2.7]()
 
