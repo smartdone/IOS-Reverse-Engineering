@@ -5,6 +5,7 @@
 3. 执行下列命令
 
 ```shell
+dpkg -i python_2.7.13-1_iphoneos-arm.deb
 ldid -S /usr/bin/python
 ldid -S /usr/lib/libpython2.7.dylib
 ldid -S /usr/lib/libssl.1.0.0.dylib

@@ -16,5 +16,6 @@
    ldid -S scp
    chmod 777 scp
    mv scp /usr/bin/scp
+   killall SpringBoard
    ```
 
