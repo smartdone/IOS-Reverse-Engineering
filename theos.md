@@ -71,3 +71,51 @@ after-install::
 `include $(THEOS_MAKE_PATH)/tweak.mk`根据不同的theos类型，通过include命令指定不同的mk文件
 
 `install.exec "killall -9 SpringBoard"`在安装之后杀掉SpringBoard好让cydiaSubstrate加载对应的dylib，和Android类似，我猜可能ios那些应用的进程可能都是SpringBoard给fork出来的，所以把它杀掉，重新打开的应用就会被注入dylib，
+
+### Tweak.xm
+
+tweak.xm是tweak默认生成的源文件。xm中的x代表支持Logos语法，xm代表支持Logos语法和C/C++语法。默认生成的代码如下：
+
+```obj
+/* How to Hook with Logos
+Hooks are written with syntax similar to that of an Objective-C @implementation.
+You don't need to #include <substrate.h>, it will be done automatically, as will
+the generation of a class list and an automatic constructor.
+
+%hook ClassName
+
+// Hooking a class method
++ (id)sharedInstance {
+	return %orig;
+}
+
+// Hooking an instance method with an argument.
+- (void)messageName:(int)argument {
+	%log; // Write a message about this call, including its class, name and arguments, to the system log.
+
+	%orig; // Call through to the original function with its original arguments.
+	%orig(nil); // Call through to the original function with a custom argument.
+
+	// If you use %orig(), you MUST supply all arguments (except for self and _cmd, the automatically generated ones.)
+}
+
+// Hooking an instance method with no arguments.
+- (id)noArguments {
+	%log;
+	id awesome = %orig;
+	[awesome doSomethingElse];
+
+	return awesome;
+}
+
+// Always make sure you clean up after yourself; Not doing so could have grave consequences!
+%end
+*/
+```
+
+- %hook只需要hook的class，必须以%end结尾
+- %log指令在%hook内部使用，作用是讲函数的类名，参数等信息写入syslog
+- %orig该指令在%hook内部使用，作用是执行hook的函数的原始代码
+- %group用于对%hook分组，便于代码管理以及按条件初始化，必须以%end结束，一个%group可以包含多个%hook所有不属于某个自定义的group的%hook会被隐式的归类到%group_ungrouped中
+- %new在%hook内部使用，给一个现有的class添加新函数，功能与class_addMethod相同
+- %c该指令的作用等同于objc_getClass或者NSClassFromString，即动态获取一个类定义，在%hook或者%ctor中使用
