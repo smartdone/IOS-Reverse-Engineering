@@ -151,3 +151,21 @@ Description字段用于描述deb包的维护人；
 Author用于描述tweak的作者；
 
 Section字段用于描述deb包所属的程序类别，不需要更改；
+
+### plist
+
+plist文件的作用和App中的Info.plist文件的作用类似，它记录了一些配置信息，描述的tweak的作用范围。
+
+## 编译打包安装
+
+### 编译
+
+theos采用make来编译，运行命令mak，当前目录会多一个obj文件夹，里面有一个dylib文件，这个就是tweak的核心
+
+### 打包
+
+使用命令`make package`来打包，其实就是先执行`make`命令，然后再执行`dpkg-deb`命令，编译完成之后就会生成一个deb的文件，这个就是最终可以发布的版本
+
+### 安装
+
+把deb包复制到ios设备上面，然后用ssh连接上设备，使用`dpkg -i xxx.deb`命令来安装，或者就用iFile来安装。
