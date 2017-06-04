@@ -1,6 +1,6 @@
 # [IPAPatch](https://github.com/Naituw/IPAPatch)
 
->  IPAPatch是一个比较神奇的东西，他可以把ipa文件当做一个动态库来执行，所以在ios的Objective-C运行时里面你就可以为所欲为
+>  IPAPatch是一个比较神奇的东西，有点类似于二次打包，他会把你写的patch编译成framework，然后解压原始ipa中的文件替换xcode生成的app里面的内容，并且通过optool将你代码生成的framework和外部的framework注入到二进制文件中，最后对这些二进制文件进行签名然后安装到手机上。
 
 ## 配置使用
 
