@@ -12,7 +12,8 @@ ios逆向工程学习记录
 - [Theos](/theos.md)
 - ​
 
-## Notes
+## 一些笔记
 
 - [Ios10.2越狱后ssh连接不上的问题](/ssh.md)
 - [ios10.2安装python2.7](/python.md)
+- [IPAPatch 使用](/ipapatch.md)
