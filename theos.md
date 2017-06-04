@@ -119,3 +119,35 @@ the generation of a class list and an automatic constructor.
 - %group用于对%hook分组，便于代码管理以及按条件初始化，必须以%end结束，一个%group可以包含多个%hook所有不属于某个自定义的group的%hook会被隐式的归类到%group_ungrouped中
 - %new在%hook内部使用，给一个现有的class添加新函数，功能与class_addMethod相同
 - %c该指令的作用等同于objc_getClass或者NSClassFromString，即动态获取一个类定义，在%hook或者%ctor中使用
+
+### control
+
+control文件中记录了deb包管理系统所需基本信息，会被打进deb包里面。control文件的内容如下：
+
+```
+Package: com.test
+Name: test
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: smartdone
+Author: smartdone
+Section: Tweaks
+```
+
+Package字段用于描述这个deb包的名字，采用的命名方式同bundle identifier类似，均为反向DNS格式，可以按需更改；
+
+Name字段用于描述这个工程的名字，可以按需更改；
+
+Depends字段用于描述deb的依赖，依赖是指这个程序运行的基本条件，可以填写固件版本或者其他程序，如果当前ios不满足依赖中定义的条件，则无法正常运行；
+
+Version字段用来描述这个deb包的版本号，可以按需更改；
+
+Architecture字段用于描述这个deb包安装的目标设备架构，不要更改哦；
+
+Description字段用于描述deb包的维护人；
+
+Author用于描述tweak的作者；
+
+Section字段用于描述deb包所属的程序类别，不需要更改；
