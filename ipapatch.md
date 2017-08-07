@@ -31,3 +31,10 @@
 ### 第七步，编译运行
 
 点击run按钮就可以了
+
+### 第一次搞需要注意的问题
+
+1. xcode需要登录你的apple id账号
+2. 需要使用砸过壳的app，或者直接在pp助手下载越狱之后的应用
+3. 在signing里面的team要选自己，然后identity里面的bundle identifier也需要修改成别人没有占用的
+
